@@ -1,6 +1,7 @@
 <template>
 
   <box-container size="medium">
+    <h1>Signup</h1>
       <input type="text" class="username-input" v-model="email">
       <input type="password" class="password" v-model="password">
       <button type="submit" @click="signup">Button</button>
@@ -23,8 +24,7 @@ export default {
   data () {
     return {
       email: undefined,
-      passowrd: undefined,
-      displayName: undefined
+      password: undefined
     }
   },
   methods: {
@@ -34,11 +34,8 @@ export default {
         const response = await this.$firebase
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
-        const user = this.$firebase.auth().currentUser
-        user.updateProfile({
-          displayName: this.displayName
-        })
         console.log(response)
+        this.$router.push('/success')
       } catch (error) {
         console.warn(error)
       }

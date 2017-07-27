@@ -13,7 +13,18 @@
 <script>
 
 export default {
-  name: 'app'
+  name: 'app',
+  mounted () {
+    this.$firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // User is signed in.
+        console.log('user is still logged in')
+      } else {
+        // No user is signed in.
+        console.log('user is ded')
+      }
+    })
+  }
 }
 </script>
 

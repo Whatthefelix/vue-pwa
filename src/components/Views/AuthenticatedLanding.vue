@@ -1,7 +1,7 @@
 <template>
 
   <box-container size="medium">
-    <h1>{{ displayName }}</h1>
+    <h1>Hey you're logged in</h1>
   </box-container>
 </template>
 
