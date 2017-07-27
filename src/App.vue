@@ -1,25 +1,77 @@
 <template>
-  <div id="app">
-    <header>
-      <span>Vue.js PWA</span>
-    </header>
+  <v-app
+    id="app"
+    :dark="dark"
+    :light="!dark"
+    standalone
+  >
+    <v-navigation-drawer
+      v-show="isAuthenticated"
+      v-model="primaryDrawer.model"
+      :persistent="primaryDrawer.type === 'persistent'"
+      :clipped="primaryDrawer.clipped"
+      :floating="primaryDrawer.floating"
+      :mini-variant="primaryDrawer.mini"
+      absolute
+      overflow
+      enable-resize-watcher
+    >
+      <v-list-tile>
+        <v-list-tile-content>
+          <v-list-tile-title>
+          </v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+    </v-navigation-drawer>
+    <v-toolbar>
+      <v-toolbar-side-icon @click.native.stop="primaryDrawer.model = !primaryDrawer.model" v-if="primaryDrawer.type !== 'permanent'"></v-toolbar-side-icon>
+      <v-toolbar-title>Vue PWA</v-toolbar-title>
+    </v-toolbar>
     <main>
-      <img src="./assets/logo.png" alt="Vue.js PWA">
-      <router-view></router-view>
+      <v-container fluid>
+        <v-layout align-center justify-center>
+          <v-flex xs10>
+            <router-view></router-view>
+          </v-flex>
+        </v-layout>
+      </v-container>
     </main>
-  </div>
+    <v-footer :absolute="footer.fixed">
+      <span>© {{ new Date().getFullYear() }}</span>
+    </v-footer>
+  </v-app>
 </template>
 
-<script>
 
+<script>
 export default {
+
   name: 'app',
+  data: () => ({
+
+    dark: true,
+    primaryDrawer: {
+      model: true,
+      type: 'persistent',
+      isActive: false
+    },
+    footer: {
+      fixed: false
+    }
+  }),
+  computed: {
+    isAuthenticated () {
+      return this.$store.user.loggedIn
+    }
+  },
   mounted () {
     this.$firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         // User is signed in.
         console.log('user is still logged in')
+        this.$store.user.loggedIn
       } else {
+        this.$route.push('/signin')
         // No user is signed in.
         console.log('user is ded')
       }
@@ -28,39 +80,13 @@ export default {
 }
 </script>
 
+
 <style>
-body {
-  margin: 0;
-}
-
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-
-main {
-  text-align: center;
-  margin-top: 40px;
-}
-
-header {
-  margin: 0;
-  height: 56px;
-  padding: 0 16px 0 24px;
-  background-color: #35495E;
-  color: #ffffff;
-}
-
-header span {
-  display: block;
-  position: relative;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: .02em;
-  font-weight: 400;
-  box-sizing: border-box;
-  padding-top: 16px;
-}
+  #app {
+    border: 1px solid rgba(0, 0, 0, .1);
+    overflow: hidden;
+  }
+  #app .container, #app {
+    min-height: calc(100vh - 102px);
+  }
 </style>

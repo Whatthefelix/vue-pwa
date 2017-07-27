@@ -12,7 +12,7 @@
  */
 export default {
   // Name
-  name: 'component',
+  name: 'box-container',
 
   // Props
   props: {

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Landing from '@/components/views/Landing'
+import SignUp from '@/components/views/SignUp'
+import SignIn from '@/components/views/SignIn'
 import AuthenticatedLanding from '@/components/views/AuthenticatedLanding'
 // import Hello from '@/components/layouts/Hello'
 
@@ -10,12 +11,16 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Landing',
-      component: Landing
+      name: 'signin',
+      component: SignIn
     },
     {
       path: '/success',
       component: AuthenticatedLanding
+    },
+    {
+      path: '/signup',
+      component: SignUp
     }
   ]
 })

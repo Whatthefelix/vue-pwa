@@ -2,9 +2,28 @@
 
   <box-container size="medium">
     <h1>Signup</h1>
+      <v-text-field
+       label="Email"
+       class="email-input"
+       v-model="email"
+      >
+      </v-text-field>
+      <v-text-field
+        label="Password"
+        v-model="password"
+        class="password"
+        type="password"
+      >
+      </v-text-field>
       <input type="text" class="username-input" v-model="email">
       <input type="password" class="password" v-model="password">
-      <button type="submit" @click="signup">Button</button>
+      <v-btn
+      type="submit"
+      dark
+      primary
+      >
+      Sign Up
+      </v-btn>
   </box-container>
 </template>
 
@@ -13,7 +32,7 @@ import BoxContainer from '@/components/layouts/boxcontainer'
 
 export default {
   // Name
-  name: 'component',
+  name: 'sign-up',
   components: {
     BoxContainer
   },
