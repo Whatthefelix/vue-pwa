@@ -1,5 +1,5 @@
 <template>
-  <v-layout class="test">
+  <div>
     <v-navigation-drawer
       v-model="primaryDrawer.model"
       :persistent="primaryDrawer.type === 'persistent'"
@@ -10,10 +10,10 @@
       overflow
       enable-resize-watcher
     >
-      <v-list-tile>
+      <v-list-tile v-show="$store.state.user">
         <v-list-tile-content>
           <v-list-tile-title>
-            <slot></slot>
+            <v-btn medium @click="logOut">Log Out</v-btn>
           </v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
@@ -22,7 +22,7 @@
       <v-toolbar-side-icon @click.native.stop="primaryDrawer.model = !primaryDrawer.model" v-if="primaryDrawer.type !== 'permanent'"></v-toolbar-side-icon>
       <v-toolbar-title>Vue PWA</v-toolbar-title>
     </v-toolbar>
-  </v-layout>
+  </div>
 </template>
 
 <script>
@@ -49,7 +49,12 @@ export default {
       }
     }
   },
-
+  methods: {
+    logOut () {
+      this.$firebase.auth().signOut()
+      this.$router.push('/')
+    }
+  },
   // Computed
   computed: {},
 

@@ -11,6 +11,7 @@
       label="Password"
       class="password"
       v-model="password"
+      type="password"
     >
     </v-text-field>
     <v-btn primary dark @click="signIn">Log in</v-btn>
@@ -42,7 +43,7 @@ export default {
       this.$firebase.auth()
       .signInWithEmailAndPassword(this.email, this.password)
       .then(() => {
-        this.$store.commit('authStateChange')
+        // this.$store.commit('authStateChange')
         this.$router.push('/success')
       }).catch(() => {
 

@@ -5,8 +5,8 @@
     :light="!dark"
     standalone
   >
-    <v-navigation-drawer
-      v-show="isAuthenticated"
+  <!--v-show="isAuthenticated"    -->
+    <!-- <v-navigation-drawer
       v-model="primaryDrawer.model"
       :persistent="primaryDrawer.type === 'persistent'"
       :clipped="primaryDrawer.clipped"
@@ -19,6 +19,7 @@
       <v-list-tile>
         <v-list-tile-content>
           <v-list-tile-title>
+            <v-btn medium @click="logOut">Log Out</v-btn>
           </v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
@@ -26,7 +27,8 @@
     <v-toolbar>
       <v-toolbar-side-icon @click.native.stop="primaryDrawer.model = !primaryDrawer.model" v-if="primaryDrawer.type !== 'permanent'"></v-toolbar-side-icon>
       <v-toolbar-title>Vue PWA</v-toolbar-title>
-    </v-toolbar>
+    </v-toolbar> -->
+    <header-component></header-component>
     <main>
       <v-container fluid>
         <v-layout align-center justify-center>
@@ -44,9 +46,14 @@
 
 
 <script>
+import HeaderComponent from '@/components/layouts/Header'
+
 export default {
 
   name: 'app',
+  components: {
+    HeaderComponent
+  },
   data: () => ({
 
     dark: true,
@@ -61,18 +68,26 @@ export default {
   }),
   computed: {
     isAuthenticated () {
-      return this.$store.user.loggedIn
+      console.log('hey')
+      console.log(this.$store.state.user)
+      return this.$store.state.user.loggedIn
     }
   },
   mounted () {
     this.$firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
+        console.log('store')
+        console.log(this)
+        this.$store.commit('update_user', user)
         // User is signed in.
+        console.log(user)
         console.log('user is still logged in')
-        this.$store.user.loggedIn
+        // this.$store.user.loggedIn
       } else {
-        this.$route.push('/signin')
         // No user is signed in.
+        // this.$router.push('/')
+        // this.user = undefined
+        this.$store.commit('update_user', user)
         console.log('user is ded')
       }
     })

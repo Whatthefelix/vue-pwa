@@ -21,6 +21,7 @@
       type="submit"
       dark
       primary
+      @click="signup"
       >
       Sign Up
       </v-btn>
