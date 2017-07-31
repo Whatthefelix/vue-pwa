@@ -54,31 +54,37 @@ export default {
   components: {
     HeaderComponent
   },
-  data: () => ({
-
-    dark: true,
-    primaryDrawer: {
-      model: true,
-      type: 'persistent',
-      isActive: false
-    },
-    footer: {
-      fixed: false
+  data () {
+    return {
+      dark: true,
+      primaryDrawer: {
+        model: true,
+        type: 'persistent',
+        isActive: false
+      },
+      footer: {
+        fixed: false
+      }
     }
-  }),
+  },
   computed: {
     isAuthenticated () {
       console.log('hey')
       console.log(this.$store.state.user)
-      return this.$store.state.user.loggedIn
+      return this.$store.state.user
+    },
+    user () {
+      return this.$store.state.user
     }
   },
   mounted () {
-    this.$firebase.auth().onAuthStateChanged(function (user) {
+    this.$firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log('store')
-        console.log(this)
+        console.log(this.$store)
+        // store.commit doesn't seem to be working?
         this.$store.commit('update_user', user)
+
         // User is signed in.
         console.log(user)
         console.log('user is still logged in')
@@ -87,6 +93,7 @@ export default {
         // No user is signed in.
         // this.$router.push('/')
         // this.user = undefined
+        debugger
         this.$store.commit('update_user', user)
         console.log('user is ded')
       }
