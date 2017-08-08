@@ -9,7 +9,6 @@ const store = new Vuex.Store({
   },
   mutations: {
     update_user (state, user) {
-      console.log(user)
       state.user = user
     }
   }

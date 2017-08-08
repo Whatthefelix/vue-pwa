@@ -17,6 +17,13 @@
           </v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
+      <v-list-tile v-show="$store.state.user">
+        <v-list-tile-content>
+          <v-list-tile-title>
+          Test
+          </v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
     </v-navigation-drawer>
     <v-toolbar>
       <v-toolbar-side-icon @click.native.stop="primaryDrawer.model = !primaryDrawer.model" v-if="primaryDrawer.type !== 'permanent'"></v-toolbar-side-icon>
@@ -73,5 +80,8 @@ export default {
   .test {
     background-color: blue;
     color: yellow;
+  }
+  li {
+    list-style-type: none;
   }
 </style>

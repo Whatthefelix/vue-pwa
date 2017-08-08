@@ -5,29 +5,6 @@
     :light="!dark"
     standalone
   >
-  <!--v-show="isAuthenticated"    -->
-    <!-- <v-navigation-drawer
-      v-model="primaryDrawer.model"
-      :persistent="primaryDrawer.type === 'persistent'"
-      :clipped="primaryDrawer.clipped"
-      :floating="primaryDrawer.floating"
-      :mini-variant="primaryDrawer.mini"
-      absolute
-      overflow
-      enable-resize-watcher
-    >
-      <v-list-tile>
-        <v-list-tile-content>
-          <v-list-tile-title>
-            <v-btn medium @click="logOut">Log Out</v-btn>
-          </v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-    </v-navigation-drawer>
-    <v-toolbar>
-      <v-toolbar-side-icon @click.native.stop="primaryDrawer.model = !primaryDrawer.model" v-if="primaryDrawer.type !== 'permanent'"></v-toolbar-side-icon>
-      <v-toolbar-title>Vue PWA</v-toolbar-title>
-    </v-toolbar> -->
     <header-component></header-component>
     <main>
       <v-container fluid>
@@ -69,8 +46,6 @@ export default {
   },
   computed: {
     isAuthenticated () {
-      console.log('hey')
-      console.log(this.$store.state.user)
       return this.$store.state.user
     },
     user () {
@@ -79,23 +54,14 @@ export default {
   },
   mounted () {
     this.$firebase.auth().onAuthStateChanged(user => {
+      console.log(user)
       if (user) {
-        console.log('store')
-        console.log(this.$store)
-        // store.commit doesn't seem to be working?
         this.$store.commit('update_user', user)
-
-        // User is signed in.
-        console.log(user)
-        console.log('user is still logged in')
-        // this.$store.user.loggedIn
+        this.$router.push({ name: 'success' })
       } else {
-        // No user is signed in.
-        // this.$router.push('/')
-        // this.user = undefined
-        debugger
         this.$store.commit('update_user', user)
-        console.log('user is ded')
+        this.$router.push({ name: 'signin' })
+        console.log('user is logged out')
       }
     })
   }
