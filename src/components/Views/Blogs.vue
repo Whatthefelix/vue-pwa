@@ -1,7 +1,7 @@
 <template>
-  <v-container :class="size" class="box-container" fluid>
-    <slot></slot>
-  </v-container>
+  <div>
+    <h1>blog</h1>
+  </div>
 </template>
 
 <script>
@@ -10,19 +10,22 @@
  * Component
  * @desc description
  */
+import BoxContainer from '@/components/layouts/boxcontainer'
+
 export default {
   // Name
-  name: 'box-container',
+  name: 'blogs',
 
-  // Props
-  props: {
-    size: String // small (400px) || medium (800px) || large (1100px)
+  components: {
+    BoxContainer
   },
+  // Props
+  props: {},
 
   // Data
   data () {
     return {
-      msg: ' World'
+      msg: 'Hello World'
     }
   },
 

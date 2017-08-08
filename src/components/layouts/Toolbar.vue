@@ -1,7 +1,8 @@
 <template>
-  <v-container :class="size" class="box-container" fluid>
-    <slot></slot>
-  </v-container>
+  <v-toolbar>
+    <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
+    <v-toolbar-title>Vue PWA</v-toolbar-title>
+  </v-toolbar>
 </template>
 
 <script>
@@ -12,17 +13,15 @@
  */
 export default {
   // Name
-  name: 'box-container',
+  name: 'toolbar',
 
   // Props
-  props: {
-    size: String // small (400px) || medium (800px) || large (1100px)
-  },
+  props: {},
 
   // Data
   data () {
     return {
-      msg: ' World'
+      drawer: true
     }
   },
 

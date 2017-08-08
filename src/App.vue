@@ -3,9 +3,9 @@
     id="app"
     :dark="dark"
     :light="!dark"
-    standalone
   >
-    <header-component></header-component>
+     <navigation></navigation>
+     <toolbar></toolbar>
     <main>
       <v-container fluid>
         <v-layout align-center justify-center>
@@ -23,22 +23,20 @@
 
 
 <script>
-import HeaderComponent from '@/components/layouts/Header'
+import Navigation from '@/components/layouts/Navigation'
+import Toolbar from '@/components/layouts/Toolbar'
 
 export default {
 
   name: 'app',
   components: {
-    HeaderComponent
+    Navigation,
+    Toolbar
   },
   data () {
     return {
+      drawer: true,
       dark: true,
-      primaryDrawer: {
-        model: true,
-        type: 'persistent',
-        isActive: false
-      },
       footer: {
         fixed: false
       }
@@ -54,14 +52,12 @@ export default {
   },
   mounted () {
     this.$firebase.auth().onAuthStateChanged(user => {
-      console.log(user)
       if (user) {
         this.$store.commit('update_user', user)
         this.$router.push({ name: 'success' })
       } else {
         this.$store.commit('update_user', user)
         this.$router.push({ name: 'signin' })
-        console.log('user is logged out')
       }
     })
   }

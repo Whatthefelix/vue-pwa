@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Blogs from '@/components/views/Blogs'
 import SignUp from '@/components/views/SignUp'
 import SignIn from '@/components/views/SignIn'
 import Firebase from 'firebase'
@@ -26,6 +27,10 @@ const router = new Router({
     {
       path: '/signup',
       component: SignUp
+    },
+    {
+      path: '/blogs',
+      component: Blogs
     }
   ]
 })
@@ -38,16 +43,5 @@ router.beforeEach((to, from, next) => {
     next('/')
   }
 })
-
-// const unsubscribe = Firebase.initializeApp(FirebaseSetup.firebaseConfig)
-// .auth().onAuthStateChanged(() => {
-//   new Vue({
-//     router,
-//     el: '#app',
-//     template: '<router-view></router-view>'
-//   })
-// })
-
-// unsubscribe()
 
 export default router
