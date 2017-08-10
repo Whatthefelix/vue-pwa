@@ -6,9 +6,7 @@ import router from './router'
 import FirebaseSetup from './firebase'
 import store from './store'
 import Vuetify from 'vuetify'
-import VueFroala from 'vue-froala-wysiwyg'
 
-Vue.use(VueFroala)
 Vue.use(Vuetify)
 Vue.use(FirebaseSetup)
 Vue.config.productionTip = false

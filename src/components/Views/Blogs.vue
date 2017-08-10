@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>blog</h1>
+    <froala :tag="'textarea'" :config="config" v-model="model"></froala>
   </div>
 </template>
 
@@ -25,7 +26,15 @@ export default {
   // Data
   data () {
     return {
-      msg: 'Hello World'
+      msg: 'Hello World',
+      config: {
+        events: {
+          'froalaEditor.initialized': () => {
+            console.log('initialized')
+          }
+        }
+      },
+      model: 'Blog Contents'
     }
   },
 
