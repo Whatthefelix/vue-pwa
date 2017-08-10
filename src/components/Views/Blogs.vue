@@ -1,7 +1,10 @@
 <template>
   <div>
     <h1>blog</h1>
-    <froala :tag="'textarea'" :config="config" v-model="model"></froala>
+    <form>
+      <quill-editor :value="textContent" @input="textContent = $event">Hey</quill-editor>
+    </form>
+    {{textContent}}
   </div>
 </template>
 
@@ -12,12 +15,14 @@
  * @desc description
  */
 import BoxContainer from '@/components/layouts/boxcontainer'
+import QuillEditor from '@/components/inputs/quilleditor'
 
 export default {
   // Name
   name: 'blogs',
 
   components: {
+    QuillEditor,
     BoxContainer
   },
   // Props
@@ -27,17 +32,11 @@ export default {
   data () {
     return {
       msg: 'Hello World',
-      config: {
-        events: {
-          'froalaEditor.initialized': () => {
-            console.log('initialized')
-          }
-        }
-      },
-      model: 'Blog Contents'
+      textContent: undefined
     }
   },
-
+  // Methods
+  methods: {},
   // Computed
   computed: {},
 

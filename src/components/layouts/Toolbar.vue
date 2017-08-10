@@ -21,6 +21,7 @@ export default {
   // Data
   data () {
     return {
+      dark: true,
       drawer: true
     }
   },

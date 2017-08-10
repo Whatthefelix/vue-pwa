@@ -25,11 +25,7 @@ export default {
       displayName: undefined
     }
   },
-  methods: {
-    async signup () {
-
-    }
-  },
+  methods: {},
   // Computed
   computed: {},
 

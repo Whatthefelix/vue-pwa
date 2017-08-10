@@ -4,6 +4,7 @@
     :dark="dark"
     :light="!dark"
   >
+
      <navigation></navigation>
      <toolbar></toolbar>
     <main>
@@ -36,7 +37,7 @@ export default {
   data () {
     return {
       drawer: true,
-      dark: true,
+      dark: false,
       footer: {
         fixed: false
       }
