@@ -2,9 +2,11 @@
   <div>
     <h1>blog</h1>
     <form>
-      <quill-editor :value="textContent" @input="textContent = $event">Hey</quill-editor>
+      <quill-editor v-model="textContent">Hey</quill-editor>
+      <!-- <quill-editor :value="textContent" @input="textContent = $event">Hey</quill-editor> -->
     </form>
     {{textContent}}
+    <a @click="saveData">hey</a>
   </div>
 </template>
 
@@ -36,7 +38,12 @@ export default {
     }
   },
   // Methods
-  methods: {},
+  methods: {
+    saveData () {
+      this.$db = 'initialized Firebase instance'
+      console.log(this.$db)
+    }
+  },
   // Computed
   computed: {},
 

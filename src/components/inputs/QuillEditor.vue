@@ -35,14 +35,12 @@ export default {
       this.quill = new Quill('#editor', {
         theme: 'snow'
       })
-
       this.quill.setContents(this.value)
-      this.quill.setContents({ 'ops': [ { 'insert': 'test\nheyasdf;a' },
-      { 'attributes': { 'header': 2 }, 'insert': '\n' }, { 'insert': 'asdfasdfasdfa' },
-      { 'attributes': { 'header': 3 }, 'insert': '\n' } ] })
 
       this.quill.on('text-change', (delta, oldDelta, source) => {
-        this.$emit('input', this.getContents())
+        if (source !== 'api') {
+          this.$emit('input', this.getContents())
+        }
       })
     },
     getContents () {
@@ -52,7 +50,7 @@ export default {
   // Watch
   watch: {
     value (newValue, oldValue) {
-      this.quill.setContents(this.value)
+      // this.quill.setContents(this.value)
     }
   },
 
