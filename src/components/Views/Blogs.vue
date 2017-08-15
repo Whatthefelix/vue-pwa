@@ -1,12 +1,13 @@
 <template>
   <div>
     <h1>blog</h1>
-    <form>
+    <form @submit.prevent="saveData">
       <quill-editor v-model="textContent">Hey</quill-editor>
       <!-- <quill-editor :value="textContent" @input="textContent = $event">Hey</quill-editor> -->
+      <button>Submit</button>
     </form>
-    {{textContent}}
-    <a @click="saveData">hey</a>
+    {{blogContent}}
+
   </div>
 </template>
 
@@ -18,6 +19,7 @@
  */
 import BoxContainer from '@/components/layouts/boxcontainer'
 import QuillEditor from '@/components/inputs/quilleditor'
+import QuillDeltaToHtml from 'quill-delta-to-html'
 
 export default {
   // Name
@@ -34,18 +36,36 @@ export default {
   data () {
     return {
       msg: 'Hello World',
-      textContent: undefined
+      textContent: undefined,
+      cfg: undefined,
+      blogContent: undefined
     }
   },
   // Methods
   methods: {
     saveData () {
-      this.$db = 'initialized Firebase instance'
-      console.log(this.$db)
+      this.$db.ref('/blog').push({
+        content: this.textContent
+      })
+    },
+    retrieveData () {
+      this.$db.ref('/blog').on('value', (snapshot) => {
+        this.blogContent = snapshot.val()
+        console.log(this.blogContent)
+        console.log(snapshot.val())
+      })
     }
   },
   // Computed
-  computed: {},
+  computed: {
+    formattedMessage () {
+      if (this.textContent) {
+        let cfg = {}
+        let converter = new QuillDeltaToHtml(this.textContent.ops, cfg)
+        return converter.convert()
+      }
+    }
+  },
 
   // Watch
   watch: {},
@@ -54,7 +74,9 @@ export default {
   created () {},
 
   // Mounted
-  mounted () {}
+  mounted () {
+    this.retrieveData()
+  }
 }
 </script>
 
