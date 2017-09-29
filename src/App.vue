@@ -6,7 +6,8 @@
   >
 
      <navigation></navigation>
-     <toolbar></toolbar>
+     <!-- <toolbar></toolbar> -->
+     <cd-header></cd-header>
     <main>
       <v-container fluid>
         <v-layout align-center justify-center>
@@ -25,14 +26,16 @@
 
 <script>
 import Navigation from '@/components/layouts/Navigation'
-import Toolbar from '@/components/layouts/Toolbar'
+import CdHeader from '@/components/layouts/CdHeader'
+// import Toolbar from '@/components/layouts/Toolbar'
 
 export default {
 
   name: 'app',
   components: {
     Navigation,
-    Toolbar
+    CdHeader
+    // Toolbar
   },
   data () {
     return {

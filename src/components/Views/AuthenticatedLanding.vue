@@ -1,7 +1,7 @@
 <template>
 
   <box-container size="medium">
-    <h1>Hey you're logged in</h1>
+    <h1>Hello Kenneth Dalvinder</h1>
   </box-container>
 </template>
 
